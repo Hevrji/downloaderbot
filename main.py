@@ -28,18 +28,18 @@ bot = Client("bot",
              api_hash= "ac2db262d5eb7ce0efc0162404c8d172")
 
 
-@bot.on_message(filters.command(["start"]) & filters.user(ADMINS))
+@bot.on_message(filters.command(["start"]))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(f"Hello [{m.from_user.first_name}](tg://user?id={m.from_user.id})\nPress /all")
 
 
-@bot.on_message(filters.command("stop") & filters.user(ADMINS))
+@bot.on_message(filters.command("stop"))
 async def restart_handler(_, m):
     await m.reply_text("**STOPPED ALL TASK**✔", True)
     os.execl(sys.executable, sys.executable, *sys.argv)
 
 
-@bot.on_message(filters.command(["all"]) & filters.user(ADMINS))
+@bot.on_message(filters.command(["all"]))
 async def account_login(bot: Client, m: Message):
     editable = await m.reply_text(f"**👀 Hey [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n 🗃 Send txt file to extract**")
     input: Message = await bot.listen(editable.chat.id)
